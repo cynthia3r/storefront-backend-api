@@ -19,10 +19,7 @@ Please refer dependencies, devDependencies and scripts section in [`package.json
 ### Install dependencies
 * install all project dependencies with `yarn` or `npm install`
 ### Setup postgres image inside docker container
-- start docker container using [`docker-compose.yml`](docker-compose.yml) which contains information related to postgres image
-```bash
-sudo docker-compose up
-```
+- start docker container using [`docker-compose.yml`](docker-compose.yml) which contains information related to postgres image `sudo docker-compose up`
 - launch bash terminal within the docker container
 `sudo docker exec -i -t <docker_container_name> bash`
 example: `sudo docker exec -i -t storefront-backend-api_postgres_1 bash`
