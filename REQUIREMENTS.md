@@ -5,38 +5,76 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
+- Index route: '/products' [GET]
+- Show route: '/products/:id' [GET]
+- Create route [token required]: '/products' [POST]
+- Update route [token required]: '/products/:id' [PUT]
+- Delete route [token required]: '/products/:id' [DELETE]
+- [OPTIONAL] Top 5 most popular products
 - [OPTIONAL] Products by category (args: product category)
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index route [token required]: '/users' [GET]
+- Show route [token required]: '/users/:id' [GET]
+- Create [token required]: '/users' [POST]
+- Update route [token required]: '/users/:id' [PUT]
+- Delete route [token required]: '/users/:id' [DELETE]
+- Login route [for response receive an authentication token]: 'users/login' [POST]
 
 #### Orders
-- Current Order by user (args: user id)[token required]
+- Index route [token required]: '/orders' [GET]
+- Show route [token required]: '/orders/:id' [GET]
+- Create [token required]: '/orders' [POST]
+- Update route [token required]: '/orders/:id' [PUT]
+- Delete route [token required]: '/orders/:id' [DELETE]
+- Current Order by user (args: user id)[token required]: '/orders/current/:user_id' [GET]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
+
+## Database Schema
+
+`CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(64) NOT NULL,
+    price INTEGER NOT NULL
+);`
+
+`CREATE TABLE users (
+    id VARCHAR PRIMARY KEY,
+    firstname VARCHAR(64) NOT NULL,
+    lastname VARCHAR(64) NOT NULL,
+    password VARCHAR
+);`
+
+`CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    status VARCHAR,
+    user_id VARCHAR REFERENCES users(id)
+);`
+
+`CREATE TABLE order_products (
+    order_id INTEGER REFERENCES orders(id),
+    product_id INTEGER REFERENCES products(id),
+    quantity INTEGER
+);`
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
+- id: number
+- name: string
+- price: number
 - [OPTIONAL] category
-
 #### User
-- id
-- firstName
-- lastName
-- password
+- id: string
+- firstName: string
+- lastName: string
+- password: string
 
-#### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+#### Order
+- order_id (id of the order): number
+- product_id (id of each product in the order) : number
+- quantity (quantity of each product in the order): number
+- user_id: string
+- status of order (active or complete): string
+
+
 
