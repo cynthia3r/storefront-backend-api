@@ -1,0 +1,1 @@
+CREATE TABLE users (id VARCHAR PRIMARY KEY, firstname VARCHAR(64) NOT NULL, lastname VARCHAR(64) NOT NULL, password VARCHAR);
