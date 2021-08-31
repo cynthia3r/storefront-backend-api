@@ -20,11 +20,13 @@ Please refer dependencies, devDependencies and scripts section in [`package.json
 * install all project dependencies with `yarn` or `npm install`
 ### Setup postgres image inside docker container
 - start docker container using [`docker-compose.yml`](docker-compose.yml) which contains information related to postgres image
-`sudo docker-compose up`
+```bash
+sudo docker-compose up
+```
 - launch bash terminal within the docker container
 `sudo docker exec -i -t <docker_container_name> bash`
 example: `sudo docker exec -i -t storefront-backend-api_postgres_1 bash`
-- login to postgres server(running on default port 5432)
+- login to postgres server (running on default port 5432)
 `psql -U <postgres_user>`
 - create store database for development env
 `create database store;`
@@ -33,6 +35,7 @@ example: `sudo docker exec -i -t storefront-backend-api_postgres_1 bash`
 
 ### Setup Environment variables
 Create .env file in the project root directory and setup the following environment variables
+```bash
 POSTGRES_HOST=127.0.0.1
 POSTGRES_PORT=5432
 POSTGRES_DB=store
@@ -43,6 +46,7 @@ ENV=dev
 BCRYPT_PASSWORD=******
 SALT_ROUNDS=10
 TOKEN_SECRET=******
+```
 
 Note: please set the password parameters which are marked as ******
 
