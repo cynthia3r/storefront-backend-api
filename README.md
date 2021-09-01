@@ -1,7 +1,16 @@
 # Storefront Backend Project
 
 ## Project Overview
-The task is to create a RESTful API in JavaScript for an online retail store. The API provides information that allows the users to browse an index of all products, see the specifics of a single product, add products to an order and view the added products in the cart.
+The task is to create a RESTful JavaScript Node API with express for an online retail store.
+
+## API functionality
+The API will support the following functionality:
+* allow users to sign up and sign in
+* allow products to be created, stored, updated and deleted from database
+* allows users to browse an index of all products, see the specifics of a single product
+* require users to be signed in to perform certain actions
+* allow users to create orders and add products to orders
+* allow users to view the added products in the cart
 ## Technologies used
 * `node.js` and `express` to build the server
 * `npm` or `yarn` dependency manager
@@ -10,9 +19,9 @@ The task is to create a RESTful API in JavaScript for an online retail store. Th
 * `prettier` and `eslint` for formatting/linting
 * `postgres` for database
 * `db-migrate` for database migration
-* `jsonwebtoken` for working with JWTs
+* `jsonwebtoken` for working with JWTs for authentication and protected endpoints
 * `dotenv` for managing environment variables
-* `bcrypt` for password encryption
+* `bcrypt` for password encryption/hashing for security
 ## Project dependencies
 Please refer dependencies, devDependencies and scripts section in [`package.json`](package.json) for more details.
 ## Installation, setup and usage
@@ -26,9 +35,17 @@ example: `sudo docker exec -i -t storefront-backend-api_postgres_1 bash`
 - login to postgres server (running on default port 5432)
 `psql -U <postgres_user>`
 - create store database for development env
-`create database store;`
+`CREATE DATABASE store;`
 - create store_test database for test env
-`create database store_test;`
+`CREATE DATABASE store_test;`
+- create a new database user and grant the user access to the database
+```bash
+CREATE USER <db_user_name> WITH PASSWORD <db_user_password>;
+GRANT ALL PRIVILEGES ON DATABASE store TO <db_user_name>;
+GRANT ALL PRIVILEGES ON DATABASE store_test TO <db_user_name>;
+```
+- connect to database `\c <db_name>`, note db for dev env is store and db for test env is store_test
+- display tables `\dt`
 
 ### Setup Environment variables
 Create .env file in the project root directory and setup the following environment variables
