@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env;
 
 export type User = {
-  id?: string;
+  id?: number;
   firstname: string;
   lastname: string;
   password: string;
