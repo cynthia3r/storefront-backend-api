@@ -52,8 +52,8 @@ export class UserStore {
   async update(id: string, user: User): Promise<User> {
     try {
       const conn = await client.connect();
-      const sql = 'UPDATE users SET firstname = $1, lastname = $2, password = $3 WHERE id=${id} RETURNING *';
-      const result = await conn.query(sql, [user.firstname, user.lastname, user.password]);
+      const sql = 'UPDATE users SET firstname = $1, lastname = ($2), password = ($3) WHERE id=($4) RETURNING *';
+      const result = await conn.query(sql, [user.firstname, user.lastname, user.password, id]);
       conn.release();
       return result.rows[0];
     } catch (err) {

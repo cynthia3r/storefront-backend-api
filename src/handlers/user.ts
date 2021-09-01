@@ -34,7 +34,7 @@ const create = async (req: express.Request, res: express.Response) => {
     };
     const newUser = await store.create(user);
     const token = jwt.sign({ user: newUser }, process.env.TOKEN_SECRET as jwt.Secret);
-    res.send(token);
+    res.send({ token });
   } catch (err) {
     res.status(400);
     res.json(err.message);
@@ -77,7 +77,7 @@ const authenticate = async (req: express.Request, res: express.Response) => {
     };
     const authUser = await store.authenticate(user);
     const token = jwt.sign({ user: authUser }, process.env.TOKEN_SECRET as jwt.Secret);
-    res.send(token);
+    res.send({ token });
   } catch (err) {
     res.status(400);
     res.json(err.message);

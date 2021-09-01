@@ -46,8 +46,8 @@ export class ProductStore {
   async update(id: number, prod: Product): Promise<Product> {
     try {
       const conn = await client.connect();
-      const sql = 'UPDATE products SET name = $1, price = $2 WHERE id=${id} RETURNING *';
-      const result = await conn.query(sql, [prod.name, prod.price]);
+      const sql = 'UPDATE products SET name = ($1), price = ($2) WHERE id=($3) RETURNING *';
+      const result = await conn.query(sql, [prod.name, prod.price, id]);
       conn.release();
       return result.rows[0];
     } catch (err) {

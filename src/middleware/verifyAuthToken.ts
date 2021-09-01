@@ -5,7 +5,9 @@ const verifyAuthToken = (req: express.Request, res: express.Response, next: expr
   try {
     const authorizationHeader = req.headers.authorization as string;
 
-    if (!authorizationHeader) throw new Error('JWT Token not provided so request cannot be processed');
+    if (!authorizationHeader) {
+      throw new Error('JWT Token not provided so request cannot be processed');
+    }
     const token = authorizationHeader.split(' ')[1];
     jwt.verify(token, process.env.TOKEN_SECRET as jwt.Secret);
     next();
