@@ -37,7 +37,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 );`
 
 `CREATE TABLE users (
-    id VARCHAR PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     firstname VARCHAR(64) NOT NULL,
     lastname VARCHAR(64) NOT NULL,
     password VARCHAR
@@ -46,12 +46,15 @@ These are the notes from a meeting with the frontend developer that describe wha
 `CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     status VARCHAR,
-    user_id VARCHAR REFERENCES users(id)
+    user_id INTEGER,
+    CONSTRAINT "orders_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
 );`
 
 `CREATE TABLE order_products (
-    order_id INTEGER REFERENCES orders(id),
-    product_id INTEGER REFERENCES products(id),
+    order_id INTEGER,
+    CONSTRAINT "order_products_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id)
+    product_id INTEGER,
+    CONSTRAINT "order_products_product_id_fkey" FOREIGN KEY (product_id) REFERENCES products(id),
     quantity INTEGER
 );`
 
@@ -61,7 +64,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - name: string
 - price: number
 #### User
-- id: string
+- id: number
 - firstName: string
 - lastName: string
 - password: string
