@@ -16,7 +16,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Users
 - Index route [token required]: '/users' [GET]
 - Show route [token required]: '/users/:id' [GET]
-- Create [token required]: '/users' [POST]
+- Create: '/users' [POST]
 - Update route [token required]: '/users/:id' [PUT]
 - Delete route [token required]: '/users/:id' [DELETE]
 - Login route [for response receive an authentication token]: 'users/login' [POST]
