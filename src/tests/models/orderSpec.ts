@@ -35,5 +35,4 @@ describe('Order Model', () => {
   it('should have a delete method', () => {
     expect(store.getCompletedOrdersByUserId).toBeDefined();
   });
-
 });
