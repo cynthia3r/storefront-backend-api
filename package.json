@@ -10,7 +10,6 @@
     "build": "tsc --esModuleInterop src/server.ts --outDir ./dist",
     "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "lint": "eslint . --ext .ts",
-    "jasmine": "jasmine-ts",
     "tsc": "tsc"
   },
   "author": "Udacity",
