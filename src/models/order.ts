@@ -66,4 +66,29 @@ export class OrderStore {
       throw new Error(`Could not delete order ${id}. Error: ${err}`);
     }
   }
+
+  async getCurrentOrderByUserId(id: string): Promise<Order> {
+    try {
+      const conn = await client.connect();
+      const sql = 'SELECT * FROM orders WHERE user_id=($1) ORDER BY id DESC LIMIT 1';
+      const result = await conn.query(sql, [id]);
+      conn.release();
+      return result.rows[0];
+    } catch (err) {
+      throw new Error(`Could not find any current order for user ${id}. Error: ${err}`);
+    }
+  }
+
+  async getCompletedOrdersByUserId(id: string): Promise<Order[]> {
+    try {
+      const conn = await client.connect();
+      const sql = 'SELECT * FROM orders WHERE user_id=($1) AND status=($2)';
+      const status = 'complete';
+      const result = await conn.query(sql, [id, status]);
+      conn.release();
+      return result.rows;
+    } catch (err) {
+      throw new Error(`Could not find completed order for user ${id}. Error: ${err}`);
+    }
+  }
 }
