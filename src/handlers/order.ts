@@ -70,12 +70,38 @@ const destroy = async (req: express.Request, res: express.Response) => {
   }
 };
 
+const showCurrentOrderForUser = async (req: express.Request, res: express.Response) => {
+  try {
+    const userId = req.params.user_id;
+    const order = await store.getCurrentOrderByUserId(userId);
+    // res.json(order);
+    res.send(order);
+  } catch (err) {
+    res.status(400);
+    res.json(err.message);
+  }
+};
+
+const showCompletedOrdersForUser = async (req: express.Request, res: express.Response) => {
+  try {
+    const userId = req.params.user_id;
+    const order = await store.getCompletedOrdersByUserId(userId);
+    // res.json(order);
+    res.send(order);
+  } catch (err) {
+    res.status(400);
+    res.json(err.message);
+  }
+};
+
 const orderRoutes = (app: express.Application) => {
   app.get('/orders', verifyAuthToken, index);
   app.get('/orders/:id', verifyAuthToken, show);
   app.post('/orders', verifyAuthToken, create);
   app.put('/orders/:id', verifyAuthToken, edit);
   app.delete('/orders/:id', verifyAuthToken, destroy);
+  app.get('/orders/current/:user_id', verifyAuthToken, showCurrentOrderForUser);
+  app.get('/orders/completed/:user_id', verifyAuthToken, showCompletedOrdersForUser);
 };
 
 export default orderRoutes;
