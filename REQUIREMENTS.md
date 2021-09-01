@@ -10,8 +10,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Create route [token required]: '/products' [POST]
 - Update route [token required]: '/products/:id' [PUT]
 - Delete route [token required]: '/products/:id' [DELETE]
-- [OPTIONAL] Top 5 most popular products
-- [OPTIONAL] Products by category (args: product category)
 
 #### Users
 - Index route [token required]: '/users' [GET]
@@ -28,7 +26,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Update route [token required]: '/orders/:id' [PUT]
 - Delete route [token required]: '/orders/:id' [DELETE]
 - Current Order by user (args: user id)[token required]: '/orders/current/:user_id' [GET]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- [OPTIONAL] Completed Orders by user (args: user id)[token required]: `'/orders/completed/:user_id' [GET]
 
 ## Database Schema
 
@@ -62,7 +60,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 - id: number
 - name: string
 - price: number
-- [OPTIONAL] category
 #### User
 - id: string
 - firstName: string
