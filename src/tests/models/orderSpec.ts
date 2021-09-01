@@ -29,47 +29,40 @@ describe('Order Model', () => {
   });
 });
 
-// it('create method should add a book', async () => {
+// it('create method should add an order', async () => {
 //   const result = await store.create({
-//     title: 'Bridge to Terabithia',
-//     total_pages: 250,
-//     author: 'Katherine Paterson',
-//     type: 'Childrens'
+//     user_id: '1',
+//     status: 'active'
 //   });
 //   expect(result).toEqual({
-//     id: "1",
-//     title: 'Bridge to Terabithia',
-//     total_pages: 250,
-//     author: 'Katherine Paterson',
-//     type: 'Childrens'
+//     id: 1,
+//     user_id: '1',
+//     status: 'active'
 //   });
 // });
 
-// it('index method should return a list of books', async () => {
+// it('index method should return a list of orders', async () => {
 //   const result = await store.index();
-//   expect(result).toEqual([{
-//     id: "1",
-//     title: 'Bridge to Terabithia',
-//     total_pages: 250,
-//     author: 'Katherine Paterson',
-//     type: 'Childrens'
-//   }]);
+//   expect(result).toEqual([
+//     {
+//       id: 1,
+//       user_id: '1',
+//       status: 'active'
+//     }
+//   ]);
 // });
 
-// it('show method should return the correct book', async () => {
-//   const result = await store.show("1");
+// it('show method should return the correct order', async () => {
+//   const result = await store.show(1);
 //   expect(result).toEqual({
-//     id: "1",
-//     title: 'Bridge to Terabithia',
-//     total_pages: 250,
-//     author: 'Katherine Paterson',
-//     type: 'Childrens'
+//     id: 1,
+//     user_id: '1',
+//     status: 'active'
 //   });
 // });
 
-// it('delete method should remove the book', async () => {
-//   store.delete("1");
-//   const result = await store.index()
-
+// it('delete method should remove the order', async () => {
+//   store.delete(1);
+//   const result = await store.index();
 //   expect(result).toEqual([]);
 // });
