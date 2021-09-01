@@ -44,7 +44,7 @@ CREATE USER <db_user_name> WITH PASSWORD <db_user_password>;
 GRANT ALL PRIVILEGES ON DATABASE store TO <db_user_name>;
 GRANT ALL PRIVILEGES ON DATABASE store_test TO <db_user_name>;
 ```
-- connect to database `\c <db_name>`, note db for dev env is store and db for test env is store_test
+- connect to database `\c <db_name>`, note: db for dev env is `store` and db for test env is `store_test`
 - display tables `\dt`
 
 ### Setup Environment variables
@@ -78,8 +78,7 @@ Note: The server runs on `http://localhost:3000/`
 * run code formatter with `yarn prettier` or `npm run prettier`
 * run eslint with `yarn lint` or `npm run lint`
 ### Run tests
-* test scripts can be run using `yarn test` or `npm run test`. The script first builds the project and then leverages jasmine for running tests with generated .js files.
-
+* test scripts can be run using `yarn test` or `npm run test`.
 
 
 
