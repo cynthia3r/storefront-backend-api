@@ -9,7 +9,7 @@
     "test": "ENV=test db-migrate --env test up && jasmine-ts && db-migrate db:drop test",
     "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "lint": "eslint . --ext .ts",
-    "jasmine": "jasmine",
+    "jasmine": "jasmine-ts",
     "tsc": "tsc"
   },
   "author": "Udacity",
