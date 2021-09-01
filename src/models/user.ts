@@ -1,4 +1,7 @@
 import client from '../database';
+import bcrypt from 'bcrypt';
+
+const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env;
 
 export type User = {
   id?: string;
@@ -36,11 +39,13 @@ export class UserStore {
     try {
       const conn = await client.connect();
       const sql = 'INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *';
-      const result = await conn.query(sql, [user.firstname, user.lastname, user.password]);
+      //BCRYPT_PASSWORD is used as pepper to generate the password digest before storing it to the db
+      const hash = bcrypt.hashSync(user.password + BCRYPT_PASSWORD, parseInt(SALT_ROUNDS as string));
+      const result = await conn.query(sql, [user.firstname, user.lastname, hash]);
       conn.release();
       return result.rows[0];
     } catch (err) {
-      throw new Error(`Could not add new user ${user.firstname}. Error: ${err}`);
+      throw new Error(`Unable to create new user ${user.firstname}. Error: ${err}`);
     }
   }
 
@@ -65,6 +70,26 @@ export class UserStore {
       return result.rows[0];
     } catch (err) {
       throw new Error(`Could not delete user ${id}. Error: ${err}`);
+    }
+  }
+
+  async authenticate(authUser: User): Promise<User | null> {
+    try {
+      const conn = await client.connect();
+      const sql = `SELECT * FROM users WHERE firstname = ($1) AND lastname = ($2)`;
+
+      const result = await conn.query(sql, [authUser.firstname, authUser.lastname]);
+      conn.release();
+      if (result.rows.length) {
+        const matchedUser = result.rows[0];
+
+        if (bcrypt.compareSync(authUser.password + BCRYPT_PASSWORD, matchedUser.password)) {
+          return matchedUser;
+        }
+      }
+      return null;
+    } catch (err) {
+      throw new Error(`Could not authenticate user ${authUser.firstname}. Error: ${err.message}`);
     }
   }
 }
