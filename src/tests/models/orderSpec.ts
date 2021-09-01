@@ -7,11 +7,6 @@ describe('Order Model', () => {
     expect(store.index).toBeDefined();
   });
 
-  it('index method should return a list of orders', async () => {
-    const result = await store.index();
-    expect(result).toEqual([]);
-  });
-
   it('should have a show method', () => {
     expect(store.show).toBeDefined();
   });
